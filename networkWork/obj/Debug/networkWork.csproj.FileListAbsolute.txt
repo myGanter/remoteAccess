@@ -1,0 +1,6 @@
+C:\Users\4el00\Desktop\server\networkWork\bin\Debug\networkWork.dll
+C:\Users\4el00\Desktop\server\networkWork\bin\Debug\networkWork.pdb
+C:\Users\4el00\Desktop\server\networkWork\obj\Debug\networkWork.csprojAssemblyReference.cache
+C:\Users\4el00\Desktop\server\networkWork\obj\Debug\networkWork.csproj.CoreCompileInputs.cache
+C:\Users\4el00\Desktop\server\networkWork\obj\Debug\networkWork.dll
+C:\Users\4el00\Desktop\server\networkWork\obj\Debug\networkWork.pdb

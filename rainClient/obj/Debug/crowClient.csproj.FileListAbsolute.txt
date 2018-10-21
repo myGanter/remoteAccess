@@ -1,0 +1,7 @@
+C:\Users\4el00\Desktop\server\rainClient\bin\Debug\rainClient.exe.config
+C:\Users\4el00\Desktop\server\rainClient\bin\Debug\rainClient.exe
+C:\Users\4el00\Desktop\server\rainClient\bin\Debug\rainClient.pdb
+C:\Users\4el00\Desktop\server\rainClient\obj\Debug\crowClient.csprojAssemblyReference.cache
+C:\Users\4el00\Desktop\server\rainClient\obj\Debug\crowClient.csproj.CoreCompileInputs.cache
+C:\Users\4el00\Desktop\server\rainClient\obj\Debug\rainClient.exe
+C:\Users\4el00\Desktop\server\rainClient\obj\Debug\rainClient.pdb
