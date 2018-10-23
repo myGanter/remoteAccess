@@ -59,7 +59,7 @@ namespace rainServer
             string fileName = $"D{date.Day}M{date.Month}Y{date.Year}H{date.Hour}M{date.Minute}.txt";
             saveFileDialog1.FileName = fileName;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)                            
-                File.WriteAllText(saveFileDialog1.FileName + fileName, textBox1.Text);
+                File.WriteAllText(saveFileDialog1.FileName, textBox1.Text);
             MessageBox.Show($"Файл {fileName} сохранён", "Message");         
         }
 

@@ -17,7 +17,9 @@ namespace rainClient.task
 
         public override void startProces(string atribute)
         {
-            string[] atr = atribute.Split(' ');        
+            string[] atr = atribute.Split(' ');
+
+            Console.WriteLine($"key {atr[0]} X:{atr[1]} Y:{atr[2]}");
 
             GO.SetCursorPos(int.Parse(atr[1]), int.Parse(atr[2]));
 
