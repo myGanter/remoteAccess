@@ -15,6 +15,7 @@ namespace networkWork.model
     {
         //"http://ganter-001-site1.etempurl.com" без паттерна
         //"https://www.whatismyip.org" с паттерном "<a href=\"/my-ip-address\">(.*)</a></h3>"
+        //"https://2ip.ru" с паттерном "<big id=\"d_clip_button\">(.*)</big>"
         public static string parceIP(string webSite, string pattern = null)
         {
             Stream stream = new WebClient().OpenRead(webSite);
@@ -37,6 +38,7 @@ namespace networkWork.model
                     return str;
                 }
             }
+            closeProcessing();
             return null;
         }
 
@@ -68,7 +70,7 @@ namespace networkWork.model
         public static string setNewIp(string passwd)
         {
             string domain = getDomain();
-            string IP = parceIP("https://www.whatismyip.org", "<a href=\"/my-ip-address\">(.*)</a></h3>");
+            string IP = parceIP("https://2ip.ru", "<big id=\"d_clip_button\">(.*)</big>");
             WebRequest request = WebRequest.Create(domain);
             request.Method = "POST";
             string data = "ip=" + IP + "&passwd=" + passwd;

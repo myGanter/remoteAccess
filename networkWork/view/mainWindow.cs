@@ -17,5 +17,6 @@ namespace networkWork.view
         event Action<Socket, streamWindow> streamStart;
         event Action<int, string, string, string> sendInfo;
         event Action<ipMode, string> ipEvent;
+        event Action<compileMode, string, bool, bool, string> compile;
     }
 }

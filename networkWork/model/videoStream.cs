@@ -22,15 +22,17 @@ namespace networkWork.model
         private List<bool> streams;
         private MemoryStream mS;
         private byte[] buffer;
+        private int port;
         public event connectionClient connectionClientEvent;
         public event shutdownClient shutdownClientEvent;
 
-        public videoStream(int bufferSize)
+        public videoStream(int bufferSize, int port = 1234)
         {
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             clients = new List<Socket>();
             streams = new List<bool>();
             buffer = new byte[bufferSize];
+            this.port = port;
             mS = new MemoryStream(buffer);
         }
 
@@ -81,7 +83,7 @@ namespace networkWork.model
 
         public void stopStreaming(int id) => streams[id] = false;
 
-        public Task listenSocets(int listenCount, int port = 1234) => Task.Run(() => 
+        public Task listenSocets(int listenCount) => Task.Run(() => 
         {
             System.Threading.Thread.Sleep(300);
             server.Bind(new IPEndPoint(IPAddress.Any, port));

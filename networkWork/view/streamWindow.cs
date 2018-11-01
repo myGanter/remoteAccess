@@ -14,6 +14,7 @@ namespace networkWork.view
         int streamId { get; set; }
         Socket client { get; set; }
         imgClient drawing { get; }
+
         event Action<int> closeWindow;
         event Action<Socket, string, string> buttonTask;
     }

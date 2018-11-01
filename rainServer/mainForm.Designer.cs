@@ -1,6 +1,6 @@
 ﻿namespace rainServer
 {
-    partial class Form1
+    partial class mainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeConnected = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,12 +47,31 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,19 +80,20 @@
             this.setNewIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getCurentIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getDomainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.getDomainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,6 +155,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
@@ -280,6 +301,46 @@
             this.tabPage3.Text = "Remove Host DNS";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button5.Location = new System.Drawing.Point(505, 126);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 23);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "Send domain";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button4.Location = new System.Drawing.Point(505, 97);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 23);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "Check domain";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.Location = new System.Drawing.Point(199, 97);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(300, 20);
+            this.textBox6.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(150, 100);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Domain";
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.button3);
@@ -344,11 +405,175 @@
             this.textBox4.Size = new System.Drawing.Size(350, 20);
             this.textBox4.TabIndex = 0;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button8);
+            this.tabPage5.Controls.Add(this.button7);
+            this.tabPage5.Controls.Add(this.textBox9);
+            this.tabPage5.Controls.Add(this.label9);
+            this.tabPage5.Controls.Add(this.checkBox5);
+            this.tabPage5.Controls.Add(this.checkBox4);
+            this.tabPage5.Controls.Add(this.panel2);
+            this.tabPage5.Controls.Add(this.panel1);
+            this.tabPage5.Controls.Add(this.checkBox3);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(776, 291);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Сompile the client";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button8.Location = new System.Drawing.Point(491, 195);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 23);
+            this.button8.TabIndex = 8;
+            this.button8.Text = "Chosen path";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button7.Location = new System.Drawing.Point(491, 224);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 23);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "Compile";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // textBox9
+            // 
+            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox9.Location = new System.Drawing.Point(185, 197);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(300, 20);
+            this.textBox9.TabIndex = 4;
+            this.textBox9.Text = "crowClient.exe";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(150, 200);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Path";
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(150, 150);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(70, 17);
+            this.checkBox5.TabIndex = 7;
+            this.checkBox5.Text = "Invisibility";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(150, 120);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(98, 17);
+            this.checkBox4.TabIndex = 6;
+            this.checkBox4.Text = "Set to autoRun";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.textBox8);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Location = new System.Drawing.Point(140, 50);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(480, 40);
+            this.panel2.TabIndex = 5;
+            this.panel2.Visible = false;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.Location = new System.Drawing.Point(36, 11);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(300, 20);
+            this.textBox8.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "IP";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.textBox7);
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Location = new System.Drawing.Point(150, 50);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(470, 40);
+            this.panel1.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 12);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Domain";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox7.Location = new System.Drawing.Point(52, 9);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(300, 20);
+            this.textBox7.TabIndex = 0;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button6.Location = new System.Drawing.Point(358, 7);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "Check domain";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(150, 30);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(66, 17);
+            this.checkBox3.TabIndex = 3;
+            this.checkBox3.Text = "Static IP";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.domainToolStripMenuItem});
+            this.domainToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
@@ -385,83 +610,58 @@
             // setNewDomainToolStripMenuItem
             // 
             this.setNewDomainToolStripMenuItem.Name = "setNewDomainToolStripMenuItem";
-            this.setNewDomainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setNewDomainToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.setNewDomainToolStripMenuItem.Text = "Set new domain";
             this.setNewDomainToolStripMenuItem.Click += new System.EventHandler(this.setNewDomainToolStripMenuItem_Click);
             // 
             // setNewIPToolStripMenuItem
             // 
             this.setNewIPToolStripMenuItem.Name = "setNewIPToolStripMenuItem";
-            this.setNewIPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setNewIPToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.setNewIPToolStripMenuItem.Text = "Set new IP";
             this.setNewIPToolStripMenuItem.Click += new System.EventHandler(this.setNewIPToolStripMenuItem_Click);
             // 
             // getIPToolStripMenuItem
             // 
             this.getIPToolStripMenuItem.Name = "getIPToolStripMenuItem";
-            this.getIPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.getIPToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.getIPToolStripMenuItem.Text = "Get domain IP";
             this.getIPToolStripMenuItem.Click += new System.EventHandler(this.getIPToolStripMenuItem_Click);
             // 
             // getCurentIPToolStripMenuItem
             // 
             this.getCurentIPToolStripMenuItem.Name = "getCurentIPToolStripMenuItem";
-            this.getCurentIPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.getCurentIPToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.getCurentIPToolStripMenuItem.Text = "Get curent IP";
             this.getCurentIPToolStripMenuItem.Click += new System.EventHandler(this.getCurentIPToolStripMenuItem_Click);
+            // 
+            // getDomainToolStripMenuItem
+            // 
+            this.getDomainToolStripMenuItem.Name = "getDomainToolStripMenuItem";
+            this.getDomainToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.getDomainToolStripMenuItem.Text = "Get domain";
+            this.getDomainToolStripMenuItem.Click += new System.EventHandler(this.getDomainToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // getDomainToolStripMenuItem
+            // helpToolStripMenuItem
             // 
-            this.getDomainToolStripMenuItem.Name = "getDomainToolStripMenuItem";
-            this.getDomainToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.getDomainToolStripMenuItem.Text = "Get domain";
-            this.getDomainToolStripMenuItem.Click += new System.EventHandler(this.getDomainToolStripMenuItem_Click);
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
             // 
-            // label6
+            // aboutToolStripMenuItem
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(150, 100);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Domain";
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // textBox6
-            // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox6.Location = new System.Drawing.Point(199, 97);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(300, 20);
-            this.textBox6.TabIndex = 1;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button4.Location = new System.Drawing.Point(505, 97);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Check domain";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button5.Location = new System.Drawing.Point(505, 126);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "Send domain";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // Form1
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -469,7 +669,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "mainForm";
             this.Text = "Crow server";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
@@ -481,6 +681,12 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -529,6 +735,23 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

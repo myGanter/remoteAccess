@@ -22,8 +22,8 @@ namespace rainServer
 
             taskStream.listenCount = 10;
             taskStream.port = 6666;
-            Form1 f1 = new Form1();
-            videoStream vS = new videoStream(9999999);
+            mainForm f1 = new mainForm();
+            videoStream vS = new videoStream(9999999, 1234);
             mainPresenter presenter = new mainPresenter(vS, f1);
 
             Application.Run(f1);

