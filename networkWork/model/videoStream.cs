@@ -11,10 +11,6 @@ using System.Drawing;
 
 namespace networkWork.model
 {
-    public delegate void connectionClient(Socket newClient, string ip, DateTime connectedTime);
-    public delegate void shutdownClient(Socket Client, string ip, DateTime disconnectedTime);
-    public delegate void imgClient(Image img);
-
     public class videoStream
     {
         private Socket server;
@@ -23,8 +19,8 @@ namespace networkWork.model
         private MemoryStream mS;
         private byte[] buffer;
         private int port;
-        public event connectionClient connectionClientEvent;
-        public event shutdownClient shutdownClientEvent;
+        public event Action<Socket, string, DateTime> connectionClientEvent;
+        public event Action<Socket, string, DateTime> shutdownClientEvent;
 
         public videoStream(int bufferSize, int port = 1234)
         {
@@ -38,9 +34,9 @@ namespace networkWork.model
 
         public void sendTask(Socket client, string task, string atribute)
         {
-            try
+            Task.Run(() =>
             {
-                Task.Run(() =>
+                try
                 {
                     using (MemoryStream mS = new MemoryStream())
                     {
@@ -51,13 +47,12 @@ namespace networkWork.model
                             client.Send(mS.ToArray());
                         }
                     }
-                });
-            }
-            catch
-            { }
+                }
+                catch { }
+            });
         }
 
-        public int startStreaming(Socket client, imgClient metod)
+        public int startStreaming(Socket client, Action<Image> metod)
         {
             streams.Add(true);
             Task.Run(() =>

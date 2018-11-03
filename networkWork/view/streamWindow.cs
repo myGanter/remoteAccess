@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Net.Sockets;
-using networkWork.model;
+using System.Drawing;
 
 namespace networkWork.view
 {
@@ -13,7 +13,7 @@ namespace networkWork.view
     {
         int streamId { get; set; }
         Socket client { get; set; }
-        imgClient drawing { get; }
+        void draw(Image img);
 
         event Action<int> closeWindow;
         event Action<Socket, string, string> buttonTask;

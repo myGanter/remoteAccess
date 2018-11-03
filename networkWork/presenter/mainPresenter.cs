@@ -75,7 +75,7 @@ namespace networkWork.presenter
         private void startStreem(Socket client, streamWindow sW)
         {
             sW.client = client;
-            sW.streamId = vS.startStreaming(client, sW.drawing);
+            sW.streamId = vS.startStreaming(client, sW.draw);
             sW.buttonTask += vS.sendTask;
             sW.closeWindow += vS.stopStreaming;
         }

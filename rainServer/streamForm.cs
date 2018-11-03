@@ -8,7 +8,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using networkWork.model;
 using networkWork.view;
 
 namespace rainServer
@@ -16,7 +15,6 @@ namespace rainServer
     public partial class streamForm : Form, streamWindow
     {
         public int streamId { get; set; }
-        public imgClient drawing { get; }
         public Socket client { get; set; }
 
         public event Action<int> closeWindow;
@@ -29,11 +27,10 @@ namespace rainServer
         public streamForm()
         {
             InitializeComponent();
-            drawing = draw;
             KeyDown += Form2_KeyDown;
         }
 
-        private void draw(Image img)
+        public void draw(Image img)
         {
             clientW = img.Width;
             clientH = img.Height;
