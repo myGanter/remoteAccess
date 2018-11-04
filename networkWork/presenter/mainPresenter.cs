@@ -25,10 +25,12 @@ namespace networkWork.presenter
             mW.streamStart += startStreem;
             mW.sendInfo += MW_sendInfo;
             mW.ipEvent += MW_ipEvent;
-            mW.compile += MW_compile; ;
+            mW.compile += MW_compile;
+            GO.networkCongestionMonitoring += mW.showNetworkLoad;
             taskStream.message += mW.message;
 
             vS.listenSocets(10);
+            GO.startNetworkMonitoring(1000);
         }
 
         private void MW_ipEvent(ipMode mode, string value) 

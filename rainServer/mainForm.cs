@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.IO;
+using rainServer.UI;
 using networkWork.view;
 using System.Net.Sockets;
 
@@ -16,6 +17,8 @@ namespace rainServer
 {
     public partial class mainForm : Form, mainWindow
     {
+        private networkLoadSchedule grap;
+
         public mainForm()
         {    
             InitializeComponent();          
@@ -201,6 +204,25 @@ namespace rainServer
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new about().Show();
+        }
+
+        public void showNetworkLoad(int send, int received)
+        {
+            try
+            {
+                Invoke(new Action(() => grap.reDraw(send, received)));
+            }
+            catch { }
+        }
+
+        private void mainForm_Resize(object sender, EventArgs e)
+        {
+            grap.reSize();
+        }
+
+        private void mainForm_Load(object sender, EventArgs e)
+        {
+            grap = new networkLoadSchedule(pictureBox1, pictureBox2.BackColor, pictureBox3.BackColor);
         }
     }
 }

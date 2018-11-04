@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using System.IO;
 using System.Net;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -13,6 +15,25 @@ namespace networkWork.model
 {
     public static class GO
     {
+        public static event Action<int, int> networkCongestionMonitoring;
+        private static PerformanceCounterCategory performanceCounterCategory = new PerformanceCounterCategory("Network Interface");
+        private static string instance = performanceCounterCategory.GetInstanceNames()[0];
+        private static PerformanceCounter performanceCounterSent = new PerformanceCounter("Network Interface", "Bytes Sent/sec", instance);
+        private static PerformanceCounter performanceCounterReceived = new PerformanceCounter("Network Interface", "Bytes Received/sec", instance);
+
+        public static Task startNetworkMonitoring(int sleep) => Task.Run(() => 
+        {
+            for (; ; )
+            {
+                int send = (int)(performanceCounterSent.NextValue() / 1024);
+                int received = (int)(performanceCounterReceived.NextValue() / 1024);
+
+                networkCongestionMonitoring?.Invoke(send, received);
+
+                Thread.Sleep(sleep);
+            }
+        });
+
         //"http://ganter-001-site1.etempurl.com" без паттерна
         //"https://www.whatismyip.org" с паттерном "<a href=\"/my-ip-address\">(.*)</a></h3>"
         //"https://2ip.ru" с паттерном "<big id=\"d_clip_button\">(.*)</big>"
