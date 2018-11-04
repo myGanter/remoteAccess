@@ -76,7 +76,8 @@ namespace rainServer.UI
             for (int i = 0; i < cH; i++)
             {
                 g.DrawLine(Pens.Green, 0, i * size, bmp.Width, i * size);
-                g.DrawString((i * (max / (bmp.Height / size))).ToString(), new Font(FontFamily.GenericMonospace, 10), Brushes.Gray, 0, bmp.Height - i * size);
+                double sizer = (double)max / cH;
+                g.DrawString(((int)(i * (sizer == 0 ? 1 : sizer))).ToString(), new Font(FontFamily.GenericMonospace, 10), Brushes.Gray, 0, bmp.Height - i * size - 17);
             }
 
             g.DrawString("Bytes", new Font(FontFamily.GenericMonospace, 10), Brushes.Gray, 0, 0);
