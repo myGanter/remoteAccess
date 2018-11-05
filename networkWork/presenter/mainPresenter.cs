@@ -23,7 +23,7 @@ namespace networkWork.presenter
             vS.connectionClientEvent += mW.connectionClient;
             vS.shutdownClientEvent += mW.shutdownClient;
             mW.streamStart += startStreem;
-            mW.sendInfo += MW_sendInfo;
+            mW.sendInfo += taskStream.sendTask;
             mW.ipEvent += MW_ipEvent;
             mW.compile += MW_compile;
             GO.networkCongestionMonitoring += mW.showNetworkLoad;
@@ -67,11 +67,6 @@ namespace networkWork.presenter
                    mW.message($"{e.Message} :(", "Error!");
                }
             });             
-        }
-
-        private void MW_sendInfo(int clientsCount, string ip, string task, string atribute)
-        {
-            taskStream.sendTask(clientsCount, ip, task, atribute);
         }
 
         private void startStreem(Socket client, streamWindow sW)

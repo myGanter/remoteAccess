@@ -24,8 +24,8 @@ namespace rainServer
             InitializeComponent();          
         }
 
-        public event Action<Socket, streamWindow> streamStart;
-        public event Action<int, string, string, string> sendInfo;
+        public event Action<Socket, streamWindow> streamStart;       
+        public event send sendInfo;
         public event Action<ipMode, string> ipEvent;
         public event Action<compileMode, string, bool, bool, string> compile;
 
@@ -70,18 +70,22 @@ namespace rainServer
             }                            
         }
 
-        private void sendInfoToClient(string mode, string value)
+        private async Task sendInfoToClient(Button but, string mode, string value)
         {
+            but.Enabled = false;
+
             if (dataGridView1.Rows.Count > 0)
             {
                 Socket client = (Socket)dataGridView1.CurrentRow.Cells[2].Value;
-                sendInfo?.Invoke(dataGridView1.Rows.Count, ((System.Net.IPEndPoint)client.RemoteEndPoint).Address.ToString(), mode, value);
+                await sendInfo?.Invoke(dataGridView1.Rows.Count, ((System.Net.IPEndPoint)client.RemoteEndPoint).Address.ToString(), mode, value);
             }
             else
                 MessageBox.Show("There are no active connections :(", "Error!");
+
+            but.Enabled = true;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             if (textBox3.Text != "")
             {
@@ -91,7 +95,7 @@ namespace rainServer
                 for (int i = 0; i < atribute.Length; i++)
                     sB.Append(atribute[i] + "|");
 
-                sendInfoToClient($"{taskMode.startProcess} {str[str.Length - 1]} {!checkBox2.Checked} {checkBox1.Checked}", sB.ToString());
+                await sendInfoToClient((Button)sender, $"{taskMode.startProcess} {str[str.Length - 1]} {!checkBox2.Checked} {checkBox1.Checked}", sB.ToString());
             }
             else
                 MessageBox.Show("No file chosen :(", "Error!");
@@ -110,15 +114,15 @@ namespace rainServer
                 textBox3.Text = File.ReadAllBytes(textBox2.Text).Length.ToString() + " byte";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
-            sendInfoToClient($"{taskMode.sendMessage} {textBox4.Text}", textBox5.Text);
+            await sendInfoToClient((Button)sender, $"{taskMode.sendMessage} {textBox4.Text}", textBox5.Text);
         }
 
 
-        private void button5_Click(object sender, EventArgs e)
+        private async void button5_Click(object sender, EventArgs e)
         {
-            sendInfoToClient($"{taskMode.removeHostDNS}", textBox6.Text);
+            await sendInfoToClient((Button)sender, $"{taskMode.removeHostDNS}", textBox6.Text);
         }
 
         public void message(string mes, string header)

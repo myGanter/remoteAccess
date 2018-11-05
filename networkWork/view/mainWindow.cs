@@ -8,6 +8,8 @@ using System.Net.Sockets;
 
 namespace networkWork.view
 {
+    public delegate Task send(int clientsCount, string ip, string task, string atribute);
+
     public interface mainWindow
     {
         void connectionClient(Socket newClient, string ip, DateTime connectedTime);
@@ -15,8 +17,8 @@ namespace networkWork.view
         void message(string mes, string header);
         void showNetworkLoad(int send, int received);
 
-        event Action<Socket, streamWindow> streamStart;
-        event Action<int, string, string, string> sendInfo;
+        event Action<Socket, streamWindow> streamStart;    
+        event send sendInfo;
         event Action<ipMode, string> ipEvent;
         event Action<compileMode, string, bool, bool, string> compile;
     }
