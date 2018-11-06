@@ -1,53 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace rainServer.UI
 {
-    class networkLoadSchedule
+    public partial class graphicLoadUI : UserControl
     {
-        private PictureBox pic;
+
+        private Color[] seriesColor;
+        public Color[] SeriesColor
+        {
+            get { return seriesColor; }
+            set { seriesColor = value; }
+        }     
+
         private Bitmap bmp;
         private Graphics g;
         private int cW = 60;
         private int cH;
         private List<List<int>> points = new List<List<int>>();
-        private List<Color> series = new List<Color>();
 
-        public networkLoadSchedule(PictureBox pic, Color series1, Color series2)
+        public graphicLoadUI()
         {
-            this.pic = pic;
-            series.Add(series1);
-            series.Add(series2);
-            bmp = new Bitmap(pic.Width, pic.Height);
-            g = Graphics.FromImage(bmp);
-            cH = bmp.Height / 40;
-
-            for (int i = 0; i < 2; i++)
-            {
-                points.Add(new List<int>());
-                for (int j = 0; j < cW; j++)
-                    points[i].Add(0);
-            }
+            InitializeComponent();
         }
 
-        public void reDraw(int send, int received)
+        public void reDraw(params int[] values)
         {
-            points[0].RemoveAt(0);
-            points[0].Add(received);
-            points[1].RemoveAt(0);
-            points[1].Add(send);
+            if (seriesColor == null || values.Length != seriesColor.Length)
+                throw new Exception("такое колличество элементов в values НЕДОПУСТИМО");
 
-            int max = points[0].Max();
-            int p1max = points[1].Max();
-            max = max < p1max ? p1max : max;
+            int max = 0;
+            for (int i = 0; i < points.Count; i++)
+            {
+                points[i].RemoveAt(0);
+                points[i].Add(values[i]);
 
-            g.Clear(Color.Black);
+                int mmax = points[i].Max();
+                max = max < mmax ? mmax : max;
+            }              
+
+            g.Clear(BackColor);
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -55,7 +54,7 @@ namespace rainServer.UI
                 {
                     g.DrawLine
                             (
-                                new Pen(series[i]),
+                                new Pen(seriesColor[i]),
                                 j * bmp.Width / cW,
                                 bmp.Height - (max == 0 ? 0 : points[i][j] * bmp.Height / max),
                                 (j + 1) * bmp.Width / cW,
@@ -64,7 +63,7 @@ namespace rainServer.UI
                 }
                 g.DrawLine
                         (
-                            new Pen(series[i]),
+                            new Pen(seriesColor[i]),
                             (points[i].Count - 2) * bmp.Width / cW,
                             bmp.Height - (max == 0 ? 0 : points[i][(points[i].Count - 2)] * bmp.Height / max),
                             ((points[i].Count - 2) + 1) * bmp.Width / cW,
@@ -83,14 +82,29 @@ namespace rainServer.UI
             g.DrawString("Bytes", new Font(FontFamily.GenericMonospace, 10), Brushes.Gray, 0, 0);
             g.DrawString("60 second", new Font(FontFamily.GenericMonospace, 10), Brushes.Gray, bmp.Width - 80, bmp.Height - 17);
 
-            pic.Image = bmp;
+            pictureBox1.Image = bmp;
         }
 
-        public void reSize()
+        private void graphicLoadUI_Load(object sender, EventArgs e)
         {
-            if (pic.Width > 0 && pic.Height > 0)
+            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bmp);
+            cH = bmp.Height / 40;
+
+            if (seriesColor != null)
+                for (int i = 0; i < seriesColor.Length; i++)
+                {
+                    points.Add(new List<int>());
+                    for (int j = 0; j < cW; j++)
+                        points[i].Add(0);
+                }
+        }
+
+        private void graphicLoadUI_Resize(object sender, EventArgs e)
+        {
+            if (pictureBox1.Width > 0 && pictureBox1.Height > 0)
             {
-                bmp = new Bitmap(pic.Width, pic.Height);
+                bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
                 g = Graphics.FromImage(bmp);
                 cH = bmp.Height / 40;
                 cH = cH < 1 ? 1 : cH;

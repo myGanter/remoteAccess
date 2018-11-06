@@ -49,3 +49,4 @@ C:\Users\4el00\Desktop\remoteAccess\rainServer\obj\Debug\crowServer.csproj.CoreC
 C:\Users\4el00\Desktop\remoteAccess\rainServer\obj\Debug\crowServer.csproj.CopyComplete
 C:\Users\4el00\Desktop\remoteAccess\rainServer\obj\Debug\crowServer.exe
 C:\Users\4el00\Desktop\remoteAccess\rainServer\obj\Debug\crowServer.pdb
+C:\Users\4el00\Desktop\remoteAccess\rainServer\obj\Debug\rainServer.UI.graphicLoadUI.resources
