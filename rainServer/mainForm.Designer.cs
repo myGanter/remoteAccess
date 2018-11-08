@@ -35,7 +35,6 @@
             this.socet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.graphicLoadUI1 = new rainServer.UI.graphicLoadUI();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -91,6 +90,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.graphicLoadUI1 = new rainServer.UI.graphicLoadUI();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -160,6 +161,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.graphicLoadUI1);
             this.tabPage1.Controls.Add(this.pictureBox3);
             this.tabPage1.Controls.Add(this.pictureBox2);
@@ -177,27 +179,13 @@
             this.tabPage1.Text = "Clients monitoring";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // graphicLoadUI1
-            // 
-            this.graphicLoadUI1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.graphicLoadUI1.BackColor = System.Drawing.Color.Black;
-            this.graphicLoadUI1.Location = new System.Drawing.Point(368, 124);
-            this.graphicLoadUI1.Name = "graphicLoadUI1";
-            this.graphicLoadUI1.SeriesColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Honeydew,
-        System.Drawing.Color.MediumOrchid};
-            this.graphicLoadUI1.Size = new System.Drawing.Size(400, 159);
-            this.graphicLoadUI1.TabIndex = 10;
-            // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.MediumOrchid;
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(625, 105);
+            this.pictureBox3.Location = new System.Drawing.Point(561, 105);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 13);
+            this.pictureBox3.Size = new System.Drawing.Size(20, 13);
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             // 
@@ -205,9 +193,9 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Honeydew;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(502, 105);
+            this.pictureBox2.Location = new System.Drawing.Point(480, 105);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 13);
+            this.pictureBox2.Size = new System.Drawing.Size(20, 13);
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
@@ -216,7 +204,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(570, 105);
+            this.label12.Location = new System.Drawing.Point(506, 105);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(49, 13);
             this.label12.TabIndex = 7;
@@ -227,7 +215,7 @@
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(440, 105);
+            this.label11.Location = new System.Drawing.Point(418, 105);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 5;
@@ -741,6 +729,31 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(587, 105);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(181, 21);
+            this.comboBox1.TabIndex = 11;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // graphicLoadUI1
+            // 
+            this.graphicLoadUI1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.graphicLoadUI1.BackColor = System.Drawing.Color.Black;
+            this.graphicLoadUI1.Location = new System.Drawing.Point(368, 132);
+            this.graphicLoadUI1.Name = "graphicLoadUI1";
+            this.graphicLoadUI1.SeriesColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Honeydew,
+        System.Drawing.Color.MediumOrchid};
+            this.graphicLoadUI1.Size = new System.Drawing.Size(400, 151);
+            this.graphicLoadUI1.TabIndex = 10;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -842,6 +855,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox1;
         private UI.graphicLoadUI graphicLoadUI1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

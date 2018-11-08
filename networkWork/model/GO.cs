@@ -17,18 +17,34 @@ namespace networkWork.model
     {
         public static event Action<int, int> networkCongestionMonitoring;
         private static PerformanceCounterCategory performanceCounterCategory = new PerformanceCounterCategory("Network Interface");
-        private static string instance = performanceCounterCategory.GetInstanceNames()[0];
-        private static PerformanceCounter performanceCounterSent = new PerformanceCounter("Network Interface", "Bytes Sent/sec", instance);
-        private static PerformanceCounter performanceCounterReceived = new PerformanceCounter("Network Interface", "Bytes Received/sec", instance);
+        private static string instance;
+        public static string Instance
+        {
+            get
+            {
+                return instance;
+            }
+            set
+            {
+                instance = value;
+                performanceCounterSent = new PerformanceCounter("Network Interface", "Bytes Sent/sec", instance);
+                performanceCounterReceived = new PerformanceCounter("Network Interface", "Bytes Received/sec", instance);
+            }
+        }
+        private static PerformanceCounter performanceCounterSent;
+        private static PerformanceCounter performanceCounterReceived;
 
         public static Task startNetworkMonitoring(int sleep) => Task.Run(() => 
         {
+            Instance = performanceCounterCategory.GetInstanceNames()[0];
+
             for (; ; )
             {
                 int send = (int)(performanceCounterSent.NextValue() / 1024);
                 int received = (int)(performanceCounterReceived.NextValue() / 1024);
 
                 networkCongestionMonitoring?.Invoke(send, received);
+                
 
                 Thread.Sleep(sleep);
             }

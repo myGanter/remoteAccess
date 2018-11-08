@@ -21,5 +21,6 @@ namespace networkWork.view
         event send sendInfo;
         event Action<ipMode, string> ipEvent;
         event Action<compileMode, string, bool, bool, string> compile;
+        event Action<string> chooseNetwork;
     }
 }

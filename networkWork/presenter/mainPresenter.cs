@@ -26,11 +26,17 @@ namespace networkWork.presenter
             mW.sendInfo += taskStream.sendTask;
             mW.ipEvent += MW_ipEvent;
             mW.compile += MW_compile;
+            mW.chooseNetwork += MW_chooseNetwork;
             GO.networkCongestionMonitoring += mW.showNetworkLoad;
             taskStream.message += mW.message;
 
             vS.listenSocets(10);
             GO.startNetworkMonitoring(1000);
+        }
+
+        private void MW_chooseNetwork(string network)
+        {
+            GO.Instance = network;
         }
 
         private void MW_ipEvent(ipMode mode, string value) 

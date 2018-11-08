@@ -25,6 +25,7 @@ namespace rainServer
         public event send sendInfo;
         public event Action<ipMode, string> ipEvent;
         public event Action<compileMode, string, bool, bool, string> compile;
+        public event Action<string> chooseNetwork;
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {            
@@ -208,7 +209,7 @@ namespace rainServer
         }
 
         public void showNetworkLoad(int send, int received)
-        {           
+        {
             try
             {
                 Invoke(new Action(() => graphicLoadUI1.reDraw(received, send)));
@@ -219,6 +220,17 @@ namespace rainServer
         private void mainForm_Load(object sender, EventArgs e)
         {
             graphicLoadUI1.SeriesColor = new Color[] { pictureBox2.BackColor, pictureBox3.BackColor };
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            string[] networks = new System.Diagnostics.PerformanceCounterCategory("Network Interface").GetInstanceNames();
+            for (int i = 0; i < networks.Length; i++)
+                comboBox1.Items.Add(networks[i]);
+            if (networks.Length > 0)
+                comboBox1.SelectedItem = comboBox1.Items[0];
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            chooseNetwork?.Invoke(comboBox1.SelectedItem.ToString());
         }
     }
 }
