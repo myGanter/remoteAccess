@@ -208,8 +208,17 @@ namespace rainServer
         }
 
         public void showNetworkLoad(int send, int received)
+        {           
+            try
+            {
+                Invoke(new Action(() => graphicLoadUI1.reDraw(received, send)));
+            }
+            catch { }
+        }
+
+        private void mainForm_Load(object sender, EventArgs e)
         {
-            Invoke(new Action(() => graphicLoadUI1.reDraw(received, send)));
+            graphicLoadUI1.SeriesColor = new Color[] { pictureBox2.BackColor, pictureBox3.BackColor };
         }
     }
 }

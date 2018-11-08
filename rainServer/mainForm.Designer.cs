@@ -35,6 +35,7 @@
             this.socet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.graphicLoadUI1 = new rainServer.UI.graphicLoadUI();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -90,7 +91,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.graphicLoadUI1 = new rainServer.UI.graphicLoadUI();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -176,6 +176,20 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clients monitoring";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // graphicLoadUI1
+            // 
+            this.graphicLoadUI1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.graphicLoadUI1.BackColor = System.Drawing.Color.Black;
+            this.graphicLoadUI1.Location = new System.Drawing.Point(368, 124);
+            this.graphicLoadUI1.Name = "graphicLoadUI1";
+            this.graphicLoadUI1.SeriesColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Honeydew,
+        System.Drawing.Color.MediumOrchid};
+            this.graphicLoadUI1.Size = new System.Drawing.Size(400, 159);
+            this.graphicLoadUI1.TabIndex = 10;
             // 
             // pictureBox3
             // 
@@ -727,20 +741,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // graphicLoadUI1
-            // 
-            this.graphicLoadUI1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.graphicLoadUI1.BackColor = System.Drawing.Color.Black;
-            this.graphicLoadUI1.Location = new System.Drawing.Point(368, 124);
-            this.graphicLoadUI1.Name = "graphicLoadUI1";
-            this.graphicLoadUI1.SeriesColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Honeydew,
-        System.Drawing.Color.MediumOrchid};
-            this.graphicLoadUI1.Size = new System.Drawing.Size(400, 159);
-            this.graphicLoadUI1.TabIndex = 10;
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -752,6 +752,7 @@
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crow server";
+            this.Load += new System.EventHandler(this.mainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

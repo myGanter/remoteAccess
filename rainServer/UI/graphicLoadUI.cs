@@ -17,14 +17,18 @@ namespace rainServer.UI
         public Color[] SeriesColor
         {
             get { return seriesColor; }
-            set { seriesColor = value; }
+            set
+            {
+                seriesColor = value;
+                initialSeries();
+            }
         }     
 
         private Bitmap bmp;
         private Graphics g;
         private int cW = 60;
         private int cH;
-        private List<List<int>> points = new List<List<int>>();
+        private List<int>[] points;
 
         public graphicLoadUI()
         {
@@ -34,10 +38,10 @@ namespace rainServer.UI
         public void reDraw(params int[] values)
         {
             if (seriesColor == null || values.Length != seriesColor.Length)
-                throw new Exception("такое колличество элементов в values НЕДОПУСТИМО");
+                throw new Exception("This number of elements in values is not ALLOWED");
 
             int max = 0;
-            for (int i = 0; i < points.Count; i++)
+            for (int i = 0; i < points.Length; i++)
             {
                 points[i].RemoveAt(0);
                 points[i].Add(values[i]);
@@ -48,7 +52,7 @@ namespace rainServer.UI
 
             g.Clear(BackColor);
 
-            for (int i = 0; i < points.Count; i++)
+            for (int i = 0; i < points.Length; i++)
             {
                 for (int j = 0; j < points[i].Count - 1; j++)
                 {
@@ -91,13 +95,7 @@ namespace rainServer.UI
             g = Graphics.FromImage(bmp);
             cH = bmp.Height / 40;
 
-            if (seriesColor != null)
-                for (int i = 0; i < seriesColor.Length; i++)
-                {
-                    points.Add(new List<int>());
-                    for (int j = 0; j < cW; j++)
-                        points[i].Add(0);
-                }
+            //initialSeries();
         }
 
         private void graphicLoadUI_Resize(object sender, EventArgs e)
@@ -110,5 +108,19 @@ namespace rainServer.UI
                 cH = cH < 1 ? 1 : cH;
             }
         }
+
+        private void initialSeries()
+        {
+            if (seriesColor != null)
+            {
+                points = new List<int>[seriesColor.Length];
+                for (int i = 0; i < seriesColor.Length; i++)
+                {
+                    points[i] = new List<int>();
+                    for (int j = 0; j < cW; j++)
+                        points[i].Add(0);
+                }
+            }
+        }     
     }
 }
