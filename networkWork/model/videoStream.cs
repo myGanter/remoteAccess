@@ -16,8 +16,7 @@ namespace networkWork.model
         private Socket server;
         private List<Socket> clients;
         private List<bool> streams;
-        private MemoryStream mS;
-        private byte[] buffer;
+        private int bufferSize;
         private int port;
         public event Action<Socket, string, DateTime> connectionClientEvent;
         public event Action<Socket, string, DateTime> shutdownClientEvent;
@@ -27,9 +26,8 @@ namespace networkWork.model
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             clients = new List<Socket>();
             streams = new List<bool>();
-            buffer = new byte[bufferSize];
             this.port = port;
-            mS = new MemoryStream(buffer);
+            this.bufferSize = bufferSize;
         }
 
         public void sendTask(Socket client, string task, string atribute)
@@ -60,16 +58,21 @@ namespace networkWork.model
                 if (!clients.Contains(client))
                     return;
                 int ID = streams.Count - 1;
-                while (streams[ID])
+                byte[] buffer = new byte[bufferSize];
+
+                using (MemoryStream mS = new MemoryStream(buffer))
                 {
-                    try
+                    while (streams[ID])
                     {
-                        client.Receive(buffer);
-                        metod.Invoke(Image.FromStream(mS));
+                        try
+                        {
+                            client.Receive(buffer);
+                            metod.Invoke(Image.FromStream(mS));
+                        }
+                        catch
+                        { }
+                        System.Threading.Thread.Sleep(100);
                     }
-                    catch
-                    { }
-                    System.Threading.Thread.Sleep(100);
                 }
             });
 
