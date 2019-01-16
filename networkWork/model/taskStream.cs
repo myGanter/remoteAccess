@@ -28,6 +28,7 @@ namespace networkWork.model
                 int count = 1;
                 do
                 {
+                    client?.Close();
                     if (count > clientsCount)
                         throw new Exception("Active user with this IP is not found :(");
                     client = server.Accept();

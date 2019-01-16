@@ -14,8 +14,7 @@ namespace networkWork.model
     public class videoStream
     {
         private Socket server;
-        private List<Socket> clients;
-        private List<bool> streams;
+        private Dictionary<Socket, List<Action<Image>>> ActiveStreams;
         private int bufferSize;
         private int port;
         public event Action<Socket, string, DateTime> connectionClientEvent;
@@ -24,8 +23,7 @@ namespace networkWork.model
         public videoStream(int bufferSize, int port = 1234)
         {
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            clients = new List<Socket>();
-            streams = new List<bool>();
+            ActiveStreams = new Dictionary<Socket, List<Action<Image>>>();
             this.port = port;
             this.bufferSize = bufferSize;
         }
@@ -50,36 +48,46 @@ namespace networkWork.model
             });
         }
 
-        public int startStreaming(Socket client, Action<Image> metod)
+        private void startStreaming(Socket client) => Task.Run(() =>
         {
-            streams.Add(true);
-            Task.Run(() =>
+            byte[] buffer = new byte[bufferSize];
+
+            using (MemoryStream mS = new MemoryStream(buffer))
             {
-                if (!clients.Contains(client))
-                    return;
-                int ID = streams.Count - 1;
-                byte[] buffer = new byte[bufferSize];
-
-                using (MemoryStream mS = new MemoryStream(buffer))
+                while (ActiveStreams.ContainsKey(client) && ActiveStreams[client].Count > 0)
                 {
-                    while (streams[ID])
+                    try
                     {
-                        try
-                        {
-                            client.Receive(buffer);
-                            metod.Invoke(Image.FromStream(mS));
-                        }
-                        catch
-                        { }
-                        System.Threading.Thread.Sleep(100);
+                        client.Receive(buffer);
+                        Image img = Image.FromStream(mS);
+                        foreach (var i in ActiveStreams[client])
+                            i.Invoke((Image)img.Clone());
+                        img.Dispose();
                     }
+                    catch
+                    { }
+                    System.Threading.Thread.Sleep(100);
                 }
-            });
+            }
+        });        
 
-            return streams.Count - 1;
+        public void AddActionForSocket(Socket client, Action<Image> metod)
+        {
+            if (ActiveStreams.ContainsKey(client))
+            {
+                ActiveStreams[client].Add(metod); 
+                if (ActiveStreams[client].Count == 1)
+                    startStreaming(client);
+            }         
+            
         }
 
-        public void stopStreaming(int id) => streams[id] = false;
+        public void RemoveActionForSocket(Socket client, Action<Image> metod)
+        {
+            if (!ActiveStreams.ContainsKey(client))
+                return;            
+            ActiveStreams[client].Remove(metod);
+        }
 
         public Task listenSocets(int listenCount) => Task.Run(() => 
         {
@@ -92,7 +100,7 @@ namespace networkWork.model
             for (; ; )
             {
                 Socket client = server.Accept();
-                clients.Add(client);
+                ActiveStreams.Add(client, new List<Action<Image>>());
                 connectionClientEvent?.Invoke(client, ((IPEndPoint)client.RemoteEndPoint).Address.ToString(), DateTime.Now);
             }
         });
@@ -101,12 +109,14 @@ namespace networkWork.model
         {
             for (; ; )
             {
-                for (int i = 0; i < clients.Count; i++)
+                foreach (var i in ActiveStreams)
                 {
-                    if (!SocketConnected(clients[i]))
+                    if (!SocketConnected(i.Key))
                     {
-                        shutdownClientEvent?.Invoke(clients[i], ((IPEndPoint)clients[i].RemoteEndPoint).Address.ToString(), DateTime.Now);
-                        clients.RemoveAt(i);
+                        shutdownClientEvent?.Invoke(i.Key, ((IPEndPoint)i.Key.RemoteEndPoint).Address.ToString(), DateTime.Now);
+                        i.Key.Close();
+                        ActiveStreams.Remove(i.Key);
+                        break;
                     }
                 }
 

@@ -14,10 +14,9 @@ namespace rainServer
 {
     public partial class streamForm : Form, streamWindow
     {
-        public int streamId { get; set; }
         public Socket client { get; set; }
 
-        public event Action<int> closeWindow;
+        public event Action<Socket, Action<Image>> closeWindow;
         public event Action<Socket, string, string> buttonTask;
 
         private bool key = true;
@@ -32,14 +31,18 @@ namespace rainServer
 
         public void draw(Image img)
         {
+            Image pastImg = pictureBox1.BackgroundImage;            
+
             clientW = img.Width;
             clientH = img.Height;
             pictureBox1.BackgroundImage = img;
+
+            pastImg.Dispose();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            closeWindow?.Invoke(streamId);
+            closeWindow?.Invoke(client, draw);
         }
 
         private string normolizeCoordinate(MouseEventArgs e)

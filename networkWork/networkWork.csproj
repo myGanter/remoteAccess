@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="model\clientCompiler.cs" />
     <Compile Include="model\GO.cs" />
+    <Compile Include="model\ImgSaver.cs" />
     <Compile Include="model\taskStream.cs" />
     <Compile Include="presenter\mainPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +56,5 @@
     <Compile Include="view\streamWindow.cs" />
     <Compile Include="view\taskMode.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

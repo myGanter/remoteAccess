@@ -22,5 +22,7 @@ namespace networkWork.view
         event Action<ipMode, string> ipEvent;
         event Action<compileMode, string, bool, bool, string> compile;
         event Action<string> chooseNetwork;
+        event Action<Socket, string> StartSaveFraim;
+        event Action<Socket> StopSaveFraim;
     }
 }

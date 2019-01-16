@@ -30,11 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timeConnected = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.socet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -90,8 +88,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.graphicLoadUI1 = new rainServer.UI.graphicLoadUI();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeConnected = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.socet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaveFraim = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,34 +117,14 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IP,
             this.timeConnected,
-            this.socet});
+            this.socet,
+            this.SaveFraim});
             this.dataGridView1.Location = new System.Drawing.Point(8, 6);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(340, 277);
+            this.dataGridView1.Size = new System.Drawing.Size(440, 277);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // IP
-            // 
-            this.IP.HeaderText = "IP";
-            this.IP.Name = "IP";
-            this.IP.ReadOnly = true;
-            this.IP.Width = 140;
-            // 
-            // timeConnected
-            // 
-            this.timeConnected.HeaderText = "Time connected";
-            this.timeConnected.Name = "timeConnected";
-            this.timeConnected.ReadOnly = true;
-            this.timeConnected.Width = 157;
-            // 
-            // socet
-            // 
-            this.socet.HeaderText = "socet";
-            this.socet.Name = "socet";
-            this.socet.ReadOnly = true;
-            this.socet.Visible = false;
             // 
             // tabControl1
             // 
@@ -156,7 +137,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(784, 317);
+            this.tabControl1.Size = new System.Drawing.Size(884, 317);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
@@ -174,16 +155,27 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(776, 291);
+            this.tabPage1.Size = new System.Drawing.Size(876, 291);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clients monitoring";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(687, 105);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(181, 21);
+            this.comboBox1.TabIndex = 11;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.MediumOrchid;
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(561, 105);
+            this.pictureBox3.Location = new System.Drawing.Point(661, 105);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 13);
             this.pictureBox3.TabIndex = 9;
@@ -193,7 +185,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Honeydew;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(480, 105);
+            this.pictureBox2.Location = new System.Drawing.Point(580, 105);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 13);
             this.pictureBox2.TabIndex = 8;
@@ -204,7 +196,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(506, 105);
+            this.label12.Location = new System.Drawing.Point(606, 105);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(49, 13);
             this.label12.TabIndex = 7;
@@ -215,7 +207,7 @@
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(418, 105);
+            this.label11.Location = new System.Drawing.Point(518, 105);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 5;
@@ -226,7 +218,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(365, 105);
+            this.label10.Location = new System.Drawing.Point(465, 105);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 4;
@@ -237,7 +229,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(365, 6);
+            this.label1.Location = new System.Drawing.Point(465, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 2;
@@ -247,7 +239,7 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(368, 22);
+            this.textBox1.Location = new System.Drawing.Point(468, 22);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
@@ -268,7 +260,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 291);
+            this.tabPage2.Size = new System.Drawing.Size(876, 291);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Send File";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -277,7 +269,7 @@
             // 
             this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(479, 143);
+            this.checkBox2.Location = new System.Drawing.Point(579, 143);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(115, 17);
             this.checkBox2.TabIndex = 9;
@@ -288,7 +280,7 @@
             // 
             this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(479, 120);
+            this.checkBox1.Location = new System.Drawing.Point(579, 120);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(125, 17);
             this.checkBox1.TabIndex = 8;
@@ -298,7 +290,7 @@
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button2.Location = new System.Drawing.Point(610, 117);
+            this.button2.Location = new System.Drawing.Point(710, 117);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 43);
             this.button2.TabIndex = 7;
@@ -312,7 +304,7 @@
             this.textBox3.Location = new System.Drawing.Point(153, 117);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(320, 20);
+            this.textBox3.Size = new System.Drawing.Size(420, 20);
             this.textBox3.TabIndex = 4;
             // 
             // label3
@@ -328,7 +320,7 @@
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.Location = new System.Drawing.Point(610, 55);
+            this.button1.Location = new System.Drawing.Point(710, 55);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -341,7 +333,7 @@
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(153, 57);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(451, 20);
+            this.textBox2.Size = new System.Drawing.Size(551, 20);
             this.textBox2.TabIndex = 1;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -364,7 +356,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(776, 291);
+            this.tabPage3.Size = new System.Drawing.Size(876, 291);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Remove Host DNS";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -372,7 +364,7 @@
             // button5
             // 
             this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button5.Location = new System.Drawing.Point(505, 126);
+            this.button5.Location = new System.Drawing.Point(605, 126);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 23);
             this.button5.TabIndex = 3;
@@ -383,7 +375,7 @@
             // button4
             // 
             this.button4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button4.Location = new System.Drawing.Point(505, 97);
+            this.button4.Location = new System.Drawing.Point(605, 97);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 23);
             this.button4.TabIndex = 2;
@@ -396,7 +388,7 @@
             this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Location = new System.Drawing.Point(199, 97);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(300, 20);
+            this.textBox6.Size = new System.Drawing.Size(400, 20);
             this.textBox6.TabIndex = 1;
             // 
             // label6
@@ -419,7 +411,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(776, 291);
+            this.tabPage4.Size = new System.Drawing.Size(876, 291);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Send message";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -462,7 +454,7 @@
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(350, 100);
+            this.textBox5.Size = new System.Drawing.Size(450, 100);
             this.textBox5.TabIndex = 1;
             // 
             // textBox4
@@ -470,7 +462,7 @@
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(231, 60);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(350, 20);
+            this.textBox4.Size = new System.Drawing.Size(450, 20);
             this.textBox4.TabIndex = 0;
             // 
             // tabPage5
@@ -487,7 +479,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(776, 291);
+            this.tabPage5.Size = new System.Drawing.Size(876, 291);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Сompile the client";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -495,7 +487,7 @@
             // button8
             // 
             this.button8.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button8.Location = new System.Drawing.Point(491, 195);
+            this.button8.Location = new System.Drawing.Point(591, 195);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 23);
             this.button8.TabIndex = 8;
@@ -506,7 +498,7 @@
             // button7
             // 
             this.button7.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button7.Location = new System.Drawing.Point(491, 224);
+            this.button7.Location = new System.Drawing.Point(591, 224);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 23);
             this.button7.TabIndex = 3;
@@ -519,7 +511,7 @@
             this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox9.Location = new System.Drawing.Point(185, 197);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(300, 20);
+            this.textBox9.Size = new System.Drawing.Size(400, 20);
             this.textBox9.TabIndex = 4;
             this.textBox9.Text = "crowClient.exe";
             // 
@@ -562,7 +554,7 @@
             this.panel2.Controls.Add(this.label8);
             this.panel2.Location = new System.Drawing.Point(140, 50);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(480, 40);
+            this.panel2.Size = new System.Drawing.Size(580, 40);
             this.panel2.TabIndex = 5;
             this.panel2.Visible = false;
             // 
@@ -571,7 +563,7 @@
             this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox8.Location = new System.Drawing.Point(36, 11);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(300, 20);
+            this.textBox8.Size = new System.Drawing.Size(400, 20);
             this.textBox8.TabIndex = 3;
             // 
             // label8
@@ -592,7 +584,7 @@
             this.panel1.Controls.Add(this.button6);
             this.panel1.Location = new System.Drawing.Point(150, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(470, 40);
+            this.panel1.Size = new System.Drawing.Size(570, 40);
             this.panel1.TabIndex = 4;
             // 
             // label7
@@ -610,13 +602,13 @@
             this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox7.Location = new System.Drawing.Point(52, 9);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(300, 20);
+            this.textBox7.Size = new System.Drawing.Size(400, 20);
             this.textBox7.TabIndex = 0;
             // 
             // button6
             // 
             this.button6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button6.Location = new System.Drawing.Point(358, 7);
+            this.button6.Location = new System.Drawing.Point(458, 7);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 23);
             this.button6.TabIndex = 1;
@@ -644,7 +636,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -729,24 +721,13 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(587, 105);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(181, 21);
-            this.comboBox1.TabIndex = 11;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // graphicLoadUI1
             // 
             this.graphicLoadUI1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicLoadUI1.BackColor = System.Drawing.Color.Black;
-            this.graphicLoadUI1.Location = new System.Drawing.Point(368, 132);
+            this.graphicLoadUI1.Location = new System.Drawing.Point(468, 132);
             this.graphicLoadUI1.Name = "graphicLoadUI1";
             this.graphicLoadUI1.SeriesColor = new System.Drawing.Color[] {
         System.Drawing.Color.Honeydew,
@@ -754,11 +735,39 @@
             this.graphicLoadUI1.Size = new System.Drawing.Size(400, 151);
             this.graphicLoadUI1.TabIndex = 10;
             // 
+            // IP
+            // 
+            this.IP.HeaderText = "IP";
+            this.IP.Name = "IP";
+            this.IP.ReadOnly = true;
+            this.IP.Width = 140;
+            // 
+            // timeConnected
+            // 
+            this.timeConnected.HeaderText = "Time connected";
+            this.timeConnected.Name = "timeConnected";
+            this.timeConnected.ReadOnly = true;
+            this.timeConnected.Width = 157;
+            // 
+            // socet
+            // 
+            this.socet.HeaderText = "socet";
+            this.socet.Name = "socet";
+            this.socet.ReadOnly = true;
+            this.socet.Visible = false;
+            // 
+            // SaveFraim
+            // 
+            this.SaveFraim.HeaderText = "Save fraim";
+            this.SaveFraim.Name = "SaveFraim";
+            this.SaveFraim.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SaveFraim.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 341);
+            this.ClientSize = new System.Drawing.Size(884, 341);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -806,9 +815,6 @@
         private System.Windows.Forms.ToolStripMenuItem getIPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getCurentIPToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn timeConnected;
-        private System.Windows.Forms.DataGridViewTextBoxColumn socet;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
@@ -856,6 +862,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private UI.graphicLoadUI graphicLoadUI1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timeConnected;
+        private System.Windows.Forms.DataGridViewTextBoxColumn socet;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SaveFraim;
     }
 }
 

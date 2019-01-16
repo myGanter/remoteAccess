@@ -18,7 +18,7 @@ namespace rainServer
     {
         public mainForm()
         {    
-            InitializeComponent();          
+            InitializeComponent();
         }
 
         public event Action<Socket, streamWindow> streamStart;       
@@ -26,6 +26,32 @@ namespace rainServer
         public event Action<ipMode, string> ipEvent;
         public event Action<compileMode, string, bool, bool, string> compile;
         public event Action<string> chooseNetwork;
+        public event Action<Socket, string> StartSaveFraim;
+        public event Action<Socket> StopSaveFraim;
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {            
+            if (e.ColumnIndex != 3 || e.RowIndex == -1)
+                return;
+
+            Socket client = (Socket)dataGridView1.CurrentRow.Cells[2].Value;
+            bool start = (bool)dataGridView1.CurrentRow.Cells[3].EditedFormattedValue;
+            if (start)
+            {
+                saveFileDialog1.FileName = "Fraim";
+                saveFileDialog1.Filter = "(*.jpg)|*.jpg|(*.bmp)|*.bmp|(*.png)|*.png";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Recording start", "Message");
+                    StartSaveFraim?.Invoke(client, saveFileDialog1.FileName);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Recording stop", "Message");
+                StopSaveFraim?.Invoke(client);
+            }
+        }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {            
