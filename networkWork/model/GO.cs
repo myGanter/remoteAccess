@@ -50,7 +50,7 @@ namespace networkWork.model
             }
         });
 
-        //"http://ganter-001-site1.etempurl.com" без паттерна
+        //дефолтный паттерн "<myIP>(.*)</myIP>"
         //"https://www.whatismyip.org" с паттерном "<a href=\"/my-ip-address\">(.*)</a></h3>"
         //"https://2ip.ru" с паттерном "<big id=\"d_clip_button\">(.*)</big>"
         public static string parceIP(string webSite, string pattern = null)
